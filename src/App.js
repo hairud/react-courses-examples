@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Grid from "@material-ui/core/Grid";
+
+import Clock1 from "./components/Clock1";
+import Clock2 from "./components/Clock2";
+import ButtonGroup from "./components/ButtonGroup";
+
+const App = () => (
+  <Grid container direction="column" alignItems="center">
+    <Grid
+      container
+      direction="row"
+      wrap="nowrap"
+      justify="space-around"
+      alignItems="center"
+    >
+      <Clock1 />
+      <Clock2 />
+    </Grid>
+
+    <ButtonGroup />
+  </Grid>
+);
 
 export default App;
