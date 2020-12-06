@@ -3,6 +3,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import ThemeContext from "../../utils/ThemeContext";
 import { padNumber } from "../../helpers/pad";
 
 const Clock1 = () => {
@@ -26,9 +27,13 @@ const Clock1 = () => {
   return (
     <Grid container direction="column" alignItems="center">
       <Typography>Функциональный компонент</Typography>
-      <Typography>
-        {paddedHours}:{paddedMinutes}:{paddedSeconds}
-      </Typography>
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <Typography variant={theme === "light" ? "h1" : "h4"}>
+            {paddedHours}:{paddedMinutes}:{paddedSeconds}
+          </Typography>
+        )}
+      </ThemeContext.Consumer>
     </Grid>
   );
 };
