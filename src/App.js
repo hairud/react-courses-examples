@@ -1,17 +1,31 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Provider as StoreProvider } from "react-redux";
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from "redux";
 
 import Grid from "@material-ui/core/Grid";
 
-import rootReducer from './store';
+import rootReducer from "./store";
 import Clock1 from "./components/Clock1";
 import Clock2 from "./components/Clock2";
 import ButtonGroup from "./components/ButtonGroup";
 import ThemeContext from "./utils/ThemeContext";
 
-const store = createStore(rootReducer)
+const logger = (store) => (next) => (action) => {
+  const { type, ...restPayload } = action;
+  console.log({ type, payload: restPayload });
+  return next(action);
+};
+
+const logger2 = (store) => (next) => (action) => {
+  console.log("logger2");
+  return next(action);
+};
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(logger, logger2)
+);
 
 const App = () => {
   const [theme, setTheme] = React.useState("light");
